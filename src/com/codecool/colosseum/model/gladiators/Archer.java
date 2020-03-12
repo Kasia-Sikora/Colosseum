@@ -17,22 +17,22 @@ public class Archer extends Gladiator {
 
 
     @Override
-    protected String getName() {
-        return listOfNames[random.nextInt(listOfNames.length)] + ", the Archer";
+    public String setName() {
+        return listOfNames[random.nextInt(listOfNames.length)];
     }
 
     @Override
-    int getHP() {
+    int setHP() {
         return BASE_HP_PARAM * MEDIUM ;
     }
 
     @Override
-    int getSP() {
+    int setSP() {
         return BASE_SP_PARAM * MEDIUM;
     }
 
     @Override
-    int getDEX() {
+    int setDEX() {
         return (int) (BASE_DEX_PARAM * HIGH);
     }
 

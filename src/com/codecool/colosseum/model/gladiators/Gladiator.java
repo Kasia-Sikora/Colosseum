@@ -28,11 +28,11 @@ public abstract class Gladiator {
 
     Gladiator(){
         random = new Random();
-        name = getName();
-        lvl = getLVL();
-        HP = getHP() * lvl;
-        SP = getSP() * lvl;
-        DEX = getDEX() * lvl;
+        name = setName();
+        lvl = setLVL();
+        HP = setHP();
+        SP = setSP();
+        DEX = setDEX();
         sayHello();
         System.out.println(this);
     }
@@ -49,30 +49,32 @@ public abstract class Gladiator {
 //    }
 
 
-    private int getLVL(){
+    int setLVL(){
         return LVL;
     }
 
-    abstract String getName();
+    abstract String setName();
 
-    abstract int getSP();
+    abstract int setSP();
 
-    abstract int getDEX();
+    abstract int setDEX();
 
-    abstract int getHP();
+    abstract int setHP();
 
-    int getGladiatorsHP(){
-        return this.HP;
+    public int geHP(){
+        return this.HP * this.lvl;
     }
 
-    int getGladiatorsSP(){
-        return this.SP;
+    public int getSP(){
+        return this.SP * this.lvl;
     }
 
-    int getGladiatorsDEX(){
-        return this.DEX;
+    public int getDEX(){ return this.DEX * this.lvl;
     }
 
+    public String getName(){
+        return name;
+    }
 
     abstract void attack();
 

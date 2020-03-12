@@ -1,7 +1,7 @@
 package com.codecool.colosseum.controller;
 
-import com.codecool.colosseum.view.viewData;
 import com.codecool.colosseum.model.gladiators.*;
+import com.codecool.colosseum.view.ViewData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,14 +10,20 @@ import java.util.Random;
 
 class Tournament {
 
-    private viewData view = new viewData();
+    private ViewData view = new ViewData();
+    private Combat combat = new Combat();
+    private Random random = new Random();
+
+    private List<GladiatorType> listOfGladiatorsType = Arrays.asList(GladiatorType.values());
+    private List<Gladiator> listOfGladiators = new ArrayList<>();
+
+    private int numberOfGladiators;
+    private int numbersOfFights;
 
     void generateGladiators() {
 
-        int numberOfGladiators = (int) Math.pow(view.getAndValidateUserInput(),2);
-        List<GladiatorType> listOfGladiatorsType = Arrays.asList(GladiatorType.values());
-        List<Gladiator> listOfGladiators = new ArrayList<>();
-        Random random = new Random();
+        numberOfGladiators = (int) Math.pow(view.getAndValidateUserInput(), 2);
+        numbersOfFights = numberOfGladiators - 1;
 
         for (int i = 0; i < numberOfGladiators; i++) {
             GladiatorType type = listOfGladiatorsType.get(random.nextInt(listOfGladiatorsType.size()));
@@ -38,5 +44,28 @@ class Tournament {
             }
         }
 
+    }
+
+    void startCombat() {
+
+        System.out.println(listOfGladiators.size());
+        System.out.println(numbersOfFights);
+        Gladiator winner;
+
+        for (int i = 0; i < numbersOfFights;) {
+            for (int j = 0; j < listOfGladiators.size(); j++) {
+                if (listOfGladiators.size() == 2) {
+                    j = 0;
+                    winner = combat.fight(listOfGladiators.get(j), listOfGladiators.get(j + 1));
+                }
+                winner = combat.fight(listOfGladiators.get(j), listOfGladiators.get(j + 1));
+                if (listOfGladiators.get(j) == winner) {
+                    listOfGladiators.remove(listOfGladiators.get(j + 1));
+                } else {
+                    listOfGladiators.remove(winner);
+                }
+                i++;
+            }
+        }
     }
 }

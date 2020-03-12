@@ -17,22 +17,22 @@ public class Assassin extends Gladiator {
 //    }
 
     @Override
-    protected String getName() {
-        return listOfNames[random.nextInt(listOfNames.length)] + ", the Assassin";
+    public String setName() {
+        return listOfNames[random.nextInt(listOfNames.length)];
     }
 
     @Override
-    int getHP() {
+    int setHP() {
         return (int) (BASE_HP_PARAM * LOW);
     }
 
     @Override
-    int getSP() {
+    int setSP() {
         return (int) (BASE_SP_PARAM * HIGH);
     }
 
     @Override
-    int getDEX() {
+    int setDEX() {
         return (int) (BASE_DEX_PARAM * HIGH);
     }
 

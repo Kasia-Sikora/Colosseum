@@ -3,12 +3,12 @@ package com.codecool.colosseum.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class viewData {
+public class ViewData {
 
     private int getUserInput() {
         try {
             Scanner input = new Scanner(System.in);
-            System.out.println("Enter how many gladiators will fight today: ");
+            System.out.println("Enter number of stages: ");
             return input.nextInt();
 
         } catch (InputMismatchException error) {
