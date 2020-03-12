@@ -19,11 +19,14 @@ class Tournament {
 
     private int numberOfGladiators;
     private int numbersOfFights;
+    private int numbersOfInitialFights;
 
     void generateGladiators() {
 
-        numberOfGladiators = (int) Math.pow(view.getAndValidateUserInput(), 2);
+        int stages = view.getAndValidateUserInput();
+        numberOfGladiators = (int) Math.pow(stages, 2);
         numbersOfFights = numberOfGladiators - 1;
+        numbersOfInitialFights = (int) Math.pow(stages -1, 2);
 
         for (int i = 0; i < numberOfGladiators; i++) {
             GladiatorType type = listOfGladiatorsType.get(random.nextInt(listOfGladiatorsType.size()));
@@ -52,17 +55,19 @@ class Tournament {
         System.out.println(numbersOfFights);
         Gladiator winner;
 
-        for (int i = 0; i < numbersOfFights;) {
-            for (int j = 0; j < listOfGladiators.size(); j++) {
-                if (listOfGladiators.size() == 2) {
-                    j = 0;
-                    winner = combat.fight(listOfGladiators.get(j), listOfGladiators.get(j + 1));
-                }
-                winner = combat.fight(listOfGladiators.get(j), listOfGladiators.get(j + 1));
-                if (listOfGladiators.get(j) == winner) {
-                    listOfGladiators.remove(listOfGladiators.get(j + 1));
-                } else {
-                    listOfGladiators.remove(winner);
+        for (int i = 0; i < numbersOfFights; ) {
+            for (int j = 0; j < numbersOfInitialFights; j++) {
+                for (int k = 0; k < listOfGladiators.size(); k++) {
+                    if (listOfGladiators.size() == 2) {
+                        k = 0;
+                        winner = combat.fight(listOfGladiators.get(k), listOfGladiators.get(k + 1));
+                    }
+                    winner = combat.fight(listOfGladiators.get(k), listOfGladiators.get(k + 1));
+                    if (listOfGladiators.get(k) == winner) {
+                        listOfGladiators.remove(listOfGladiators.get(k + 1));
+                    } else {
+                        listOfGladiators.remove(winner);
+                    }
                 }
                 i++;
             }
