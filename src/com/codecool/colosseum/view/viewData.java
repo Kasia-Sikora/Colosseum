@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 public class viewData {
 
-    private int getUserInput(String inputInfo) {
+    private int getUserInput() {
         try {
             Scanner input = new Scanner(System.in);
-            System.out.println(inputInfo);
+            System.out.println("Enter how many gladiators will fight today: ");
             return input.nextInt();
 
         } catch (InputMismatchException error) {
-            System.out.println("Invalid input");
+            System.out.println("Invalid input, try again");
             return -1;
         }
 
@@ -22,13 +22,11 @@ public class viewData {
 
         int numberOfGladiators;
         do {
-            numberOfGladiators = getUserInput("Enter number of row: ");
+            numberOfGladiators = getUserInput();
             if (numberOfGladiators == 0) {
                 System.out.println("No one want's to fight today? ;)");
-            } else {
-                return numberOfGladiators;
             }
         } while (numberOfGladiators < 1);
-        return -1;
+        return numberOfGladiators;
     }
 }

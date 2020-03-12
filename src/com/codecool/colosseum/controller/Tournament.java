@@ -14,7 +14,7 @@ class Tournament {
 
     void generateGladiators() {
 
-        int numberOfGladiators = view.getAndValidateUserInput();
+        int numberOfGladiators = (int) Math.pow(view.getAndValidateUserInput(),2);
         List<GladiatorType> listOfGladiatorsType = Arrays.asList(GladiatorType.values());
         List<Gladiator> listOfGladiators = new ArrayList<>();
         Random random = new Random();
