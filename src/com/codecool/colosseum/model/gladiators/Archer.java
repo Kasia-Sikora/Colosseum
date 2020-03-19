@@ -10,11 +10,6 @@ public class Archer extends Gladiator {
     public Archer(){
         super();
     }
-//
-//    public Archer(String name,  int baseHP, int baseSP, int baseDEX, int lvl) {
-//        super(name, baseHP, baseSP, baseDEX, lvl);
-//    }
-
 
     @Override
     public String setName() {
@@ -22,29 +17,18 @@ public class Archer extends Gladiator {
     }
 
     @Override
-    int setHP() {
+    float getBaseHP() {
         return BASE_HP_PARAM * MEDIUM ;
     }
 
     @Override
-    int setSP() {
+    float setBaseSP() {
         return BASE_SP_PARAM * MEDIUM;
     }
 
     @Override
-    int setDEX() {
+    int setBaseDEX() {
         return (int) (BASE_DEX_PARAM * HIGH);
-    }
-
-
-    @Override
-    public void attack() {
-        System.out.println("Arrow Attack");
-    }
-
-    @Override
-    public void defend() {
-        System.out.println("Archer Defend");
     }
 
 }

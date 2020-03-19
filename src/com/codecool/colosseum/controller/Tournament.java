@@ -1,76 +1,51 @@
 package com.codecool.colosseum.controller;
 
-import com.codecool.colosseum.model.gladiators.*;
-import com.codecool.colosseum.view.ViewData;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import com.codecool.colosseum.model.gladiators.Gladiator;
 
 class Tournament {
 
-    private ViewData view = new ViewData();
+
+    private Gladiator Gladiator1;
+    private Gladiator Gladiator2;
+
+    private Tournament LeftBranch;
+    private Tournament RightBranch;
+
     private Combat combat = new Combat();
-    private Random random = new Random();
 
-    private List<GladiatorType> listOfGladiatorsType = Arrays.asList(GladiatorType.values());
-    private List<Gladiator> listOfGladiators = new ArrayList<>();
+    private boolean _goRight;
 
-    private int numberOfGladiators;
-    private int numbersOfFights;
-    private int numbersOfInitialFights;
-
-    void generateGladiators() {
-
-        int stages = view.getAndValidateUserInput();
-        numberOfGladiators = (int) Math.pow(stages, 2);
-        numbersOfFights = numberOfGladiators - 1;
-        numbersOfInitialFights = (int) Math.pow(stages -1, 2);
-
-        for (int i = 0; i < numberOfGladiators; i++) {
-            GladiatorType type = listOfGladiatorsType.get(random.nextInt(listOfGladiatorsType.size()));
-
-            switch (type) {
-                case ARCHER:
-                    listOfGladiators.add(new Archer());
-                    break;
-                case BRUTAL:
-                    listOfGladiators.add(new Brutal());
-                    break;
-                case ASSASSIN:
-                    listOfGladiators.add(new Assassin());
-                    break;
-                case SWORDSMAN:
-                    listOfGladiators.add(new Swordsman());
-                    break;
-            }
-        }
-
+    Tournament(Gladiator gladiator1, Gladiator gladiator2) {
+        Gladiator1 = gladiator1;
+        Gladiator2 = gladiator2;
     }
 
-    void startCombat() {
+    void add(Gladiator gladiator, Gladiator gladiator1) {
+        if (LeftBranch == null || RightBranch == null) {
+            LeftBranch = new Tournament(Gladiator1, Gladiator2);
+            RightBranch = new Tournament(gladiator, gladiator1);
 
-        System.out.println(listOfGladiators.size());
-        System.out.println(numbersOfFights);
-        Gladiator winner;
-
-        for (int i = 0; i < numbersOfFights; ) {
-            for (int j = 0; j < numbersOfInitialFights; j++) {
-                for (int k = 0; k < listOfGladiators.size(); k++) {
-                    if (listOfGladiators.size() == 2) {
-                        k = 0;
-                        winner = combat.fight(listOfGladiators.get(k), listOfGladiators.get(k + 1));
-                    }
-                    winner = combat.fight(listOfGladiators.get(k), listOfGladiators.get(k + 1));
-                    if (listOfGladiators.get(k) == winner) {
-                        listOfGladiators.remove(listOfGladiators.get(k + 1));
-                    } else {
-                        listOfGladiators.remove(winner);
-                    }
-                }
-                i++;
+            Gladiator1 = null;
+            Gladiator2 = null;
+        } else {
+            if (_goRight) {
+                RightBranch.add(gladiator, gladiator1);
+            } else {
+                LeftBranch.add(gladiator, gladiator1);
             }
+            _goRight = !_goRight;
         }
+    }
+
+    Gladiator fight() {
+        if (LeftBranch != null && RightBranch != null) {
+            Gladiator1 = LeftBranch.fight();
+            Gladiator2 = RightBranch.fight();
+
+            LeftBranch = null;
+            RightBranch = null;
+        }
+
+        return combat.startCombat(Gladiator1, Gladiator2);
     }
 }

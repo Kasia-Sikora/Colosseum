@@ -7,14 +7,7 @@ public class Assassin extends Gladiator {
             "Decimus Aebutius Severus", "Caius Cantilius Micianus", "Nonus Silius Martial", "Aulus Ateius Salvian"};
 
 
-    public Assassin(){
-        super();
-    }
-
-
-//    public Assassin(String name, int baseHP, int baseSP, int baseDEX, int lvl) {
-//        super( name, baseHP, baseSP, baseDEX, lvl);
-//    }
+    public Assassin() { super(); }
 
     @Override
     public String setName() {
@@ -22,28 +15,18 @@ public class Assassin extends Gladiator {
     }
 
     @Override
-    int setHP() {
-        return (int) (BASE_HP_PARAM * LOW);
+    float getBaseHP() {
+        return (float) (BASE_HP_PARAM * LOW);
     }
 
     @Override
-    int setSP() {
-        return (int) (BASE_SP_PARAM * HIGH);
+    float setBaseSP() {
+        return (float) (BASE_SP_PARAM * HIGH);
     }
 
     @Override
-    int setDEX() {
+    int setBaseDEX() {
         return (int) (BASE_DEX_PARAM * HIGH);
     }
 
-
-    @Override
-    public void attack() {
-        System.out.println("Dagger Attack");
-    }
-
-    @Override
-    public void defend() {
-        System.out.println("Assasin Defend");
-    }
 }

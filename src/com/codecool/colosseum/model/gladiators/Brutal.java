@@ -7,13 +7,7 @@ public class Brutal extends Gladiator {
             "Kaeso Caninius Olympicus", "Publius Vibidius Pudentius", "Appius Lafrenius Rex", "Numerius Maelius Scipio"};
 
 
-    public Brutal(){
-        super();
-    }
-
-//    public Brutal(String name,  int baseHP, int baseSP, int baseDEX, int lvl) {
-//        super(name, baseHP, baseSP, baseDEX, lvl);
-//    }
+    public Brutal() { super(); }
 
     @Override
     public String setName() {
@@ -21,29 +15,19 @@ public class Brutal extends Gladiator {
     }
 
     @Override
-    int setHP() {
-        return (int) (BASE_HP_PARAM * HIGH);
+    float getBaseHP() {
+        return (float) (BASE_HP_PARAM * HIGH);
     }
 
     @Override
-    int setSP() {
-        return (int) (BASE_SP_PARAM * HIGH);
+    float setBaseSP() {
+        return (float) (BASE_SP_PARAM * HIGH);
     }
 
     @Override
-    int setDEX() {
+    int setBaseDEX() {
         return (int) (BASE_DEX_PARAM * LOW);
     }
 
-
-    @Override
-    public void attack() {
-        System.out.println("Fist Attack");
-    }
-
-    @Override
-    public void defend() {
-        System.out.println("Brutal Defend");
-    }
 }
 

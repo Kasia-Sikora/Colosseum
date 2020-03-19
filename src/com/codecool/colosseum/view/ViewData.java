@@ -1,11 +1,14 @@
 package com.codecool.colosseum.view;
 
+import com.codecool.colosseum.model.gladiators.Gladiator;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ViewData {
 
-    private int getUserInput() {
+    public int getUserInput() {
+        final int INVALID_INPUT = -1;
         try {
             Scanner input = new Scanner(System.in);
             System.out.println("Enter number of stages: ");
@@ -13,20 +16,24 @@ public class ViewData {
 
         } catch (InputMismatchException error) {
             System.out.println("Invalid input, try again");
-            return -1;
+            return INVALID_INPUT;
         }
 
     }
 
-    public int getAndValidateUserInput() {
+    public void combatMessage(Gladiator firstGladiator, Gladiator secondGladiator, float damage) {
+        System.out.println(firstGladiator.getName() + " attacks " + secondGladiator.getName() + "with damage power " + damage);
+    }
 
-        int numberOfGladiators;
-        do {
-            numberOfGladiators = getUserInput();
-            if (numberOfGladiators == 0) {
-                System.out.println("No one want's to fight today? ;)");
-            }
-        } while (numberOfGladiators < 1);
-        return numberOfGladiators;
+    public void healthInfo(Gladiator gladiator) {
+        System.out.println(gladiator.getName() + " has " + gladiator.getHP() + " health.");
+    }
+
+    public void deadGladiatorMessage(Gladiator gladiator) {
+        System.out.println(gladiator.getName() + " is dead.");
+    }
+
+    public void displayMessage(String text) {
+        System.out.println(text);
     }
 }
